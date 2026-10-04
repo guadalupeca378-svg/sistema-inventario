@@ -1,0 +1,52 @@
+name: CI - Pruebas y construcción
+
+on:
+  push:
+    branches: [ main, develop, 'feature/**', release ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  pruebas:
+    name: Pruebas PHPUnit (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ '8.2', '8.3' ]
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, pdo_pgsql
+          coverage: none
+
+      - name: Validar composer.json
+        run: composer validate --strict
+
+      - name: Instalar dependencias
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Ejecutar casos de prueba
+        run: vendor/bin/phpunit --testdox
+
+  docker:
+    name: Construir imagen Docker
+    runs-on: ubuntu-latest
+    needs: pruebas
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Construir imagen
+        run: docker build -t sistema-inventario:${{ github.sha }} .
+
+      - name: Verificar contenedor
+        run: |
+          docker run -d --name inventario -p 8080:80 sistema-inventario:${{ github.sha }}
+          sleep 5
+          curl --fail --silent http://localhost:8080/ | grep "Sistema de Control de Inventario"
+          docker stop inventario

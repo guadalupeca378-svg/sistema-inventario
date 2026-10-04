@@ -1,7 +1,6 @@
 {
   "editor.formatOnSave": true,
   "files.eol": "\n",
-  "php.validate.executablePath": "php",
   "git.autofetch": true,
   "git.defaultBranchName": "main"
 }
