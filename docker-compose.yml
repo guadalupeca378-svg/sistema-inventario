@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    image: sistema-inventario:local
+    container_name: inventario-app
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: inventario
+      DB_USERNAME: inventario
+      DB_PASSWORD: ${DB_PASSWORD:-cambiar_en_produccion}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    container_name: inventario-db
+    environment:
+      POSTGRES_DB: inventario
+      POSTGRES_USER: inventario
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-cambiar_en_produccion}
+    volumes:
+      - datos-inventario:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  datos-inventario:
