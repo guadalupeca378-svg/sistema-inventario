@@ -15,6 +15,9 @@ final class Inventario
     /** @var array<string, Producto> */
     private array $productos = [];
 
+    /** @var list<Movimiento> */
+    private array $movimientos = [];
+
     public function registrarProducto(Producto $producto): Producto
     {
         if (isset($this->productos[$producto->clave])) {
@@ -48,5 +51,58 @@ final class Inventario
     public function productos(): array
     {
         return array_values($this->productos);
+    }
+
+    public function registrarEntrada(string $clave, int $cantidad, string $responsable): Movimiento
+    {
+        $this->validarCantidad($cantidad);
+        $producto = $this->consultarProducto($clave);
+
+        $producto->existencia += $cantidad;
+
+        return $this->movimientos[] = new Movimiento(Movimiento::ENTRADA, $clave, $cantidad, $responsable);
+    }
+
+    public function registrarSalida(string $clave, int $cantidad, string $responsable): Movimiento
+    {
+        $this->validarCantidad($cantidad);
+        $producto = $this->consultarProducto($clave);
+
+        if ($cantidad > $producto->existencia) {
+            throw new InventarioException(
+                "Existencia insuficiente de {$clave}: disponible {$producto->existencia}, solicitado {$cantidad}"
+            );
+        }
+
+        $producto->existencia -= $cantidad;
+
+        return $this->movimientos[] = new Movimiento(Movimiento::SALIDA, $clave, $cantidad, $responsable);
+    }
+
+    /**
+     * @return list<array{clave: string, nombre: string, existencia: int, minimo: int, estado: string}>
+     */
+    public function consultarExistencias(): array
+    {
+        return array_map(static fn (Producto $p): array => [
+            'clave' => $p->clave,
+            'nombre' => $p->nombre,
+            'existencia' => $p->existencia,
+            'minimo' => $p->existenciaMinima,
+            'estado' => $p->estaBajoMinimo() ? 'Bajo mínimo' : 'Normal',
+        ], $this->productos());
+    }
+
+    /** @return list<Movimiento> */
+    public function movimientos(): array
+    {
+        return $this->movimientos;
+    }
+
+    private function validarCantidad(int $cantidad): void
+    {
+        if ($cantidad <= 0) {
+            throw new InventarioException('La cantidad debe ser mayor a cero');
+        }
     }
 }
