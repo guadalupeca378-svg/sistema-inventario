@@ -10,18 +10,44 @@ Cada caso está automatizado en la carpeta `tests/` y se identifica con su ID en
 
 | ID | Funcionalidad | Entrada | Resultado esperado | Resultado obtenido | Estado |
 |---|---|---|---|---|---|
-| CP-01 | Registrar producto | Datos válidos (clave `P-001`, nombre, categoría, existencia mínima) | Producto registrado | Pendiente | Pendiente |
-| CP-02 | Registrar producto | Código duplicado (`P-001` ya existe) | Mostrar error "La clave ya existe" | Pendiente | Pendiente |
-| CP-03 | Consultar producto | Código existente (`P-001`) | Mostrar producto | Pendiente | Pendiente |
-| CP-04 | Consultar producto | Código inexistente (`P-999`) | Mostrar mensaje "Producto no encontrado" | Pendiente | Pendiente |
-| CP-05 | Modificar producto | Datos válidos (nuevo nombre y mínimo) | Información actualizada | Pendiente | Pendiente |
-| CP-06 | Eliminar producto | Producto existente | Producto eliminado | Pendiente | Pendiente |
-| CP-07 | Entrada de producto | Cantidad válida (+20) | Incrementar existencia | Pendiente | Pendiente |
-| CP-08 | Salida de producto | Cantidad disponible (−5 de 20) | Reducir existencia | Pendiente | Pendiente |
-| CP-09 | Salida de producto | Cantidad mayor a la existencia (−50 de 20) | Rechazar movimiento, existencia sin cambio | Pendiente | Pendiente |
-| CP-10 | Entrada de producto | Cantidad en cero o negativa | Rechazar movimiento | Pendiente | Pendiente |
-| CP-11 | Consultar existencias | Productos con existencia normal y bajo el mínimo | Lista con estado "Normal" / "Bajo mínimo" | Pendiente | Pendiente |
-| CP-12 | Reporte de inventario | Entradas y salidas registradas | Totales del reporte iguales a los movimientos | Pendiente | Pendiente |
+| CP-01 | Registrar producto | Datos válidos (clave `P-001`, nombre, categoría, existencia mínima) | Producto registrado | Producto P-002 registrado con existencia 0 | ✅ Aprobado |
+| CP-02 | Registrar producto | Código duplicado (`P-001` ya existe) | Mostrar error "La clave ya existe" | Error: "La clave P-001 ya existe" | ✅ Aprobado |
+| CP-03 | Consultar producto | Código existente (`P-001`) | Mostrar producto | Se muestran nombre, categoría y mínimo de P-001 | ✅ Aprobado |
+| CP-04 | Consultar producto | Código inexistente (`P-999`) | Mostrar mensaje "Producto no encontrado" | Mensaje: "Producto P-999 no encontrado" | ✅ Aprobado |
+| CP-05 | Modificar producto | Datos válidos (nuevo nombre y mínimo) | Información actualizada | Nombre y mínimo actualizados | ✅ Aprobado |
+| CP-06 | Eliminar producto | Producto existente | Producto eliminado | P-001 eliminado; la consulta lo reporta como no encontrado | ✅ Aprobado |
+| CP-07 | Entrada de producto | Cantidad válida (+20) | Incrementar existencia | Existencia 0 → 20; movimiento con fecha y responsable | ✅ Aprobado |
+| CP-08 | Salida de producto | Cantidad disponible (−5 de 20) | Reducir existencia | Existencia 20 → 15 | ✅ Aprobado |
+| CP-09 | Salida de producto | Cantidad mayor a la existencia (−50 de 20) | Rechazar movimiento, existencia sin cambio | Error "Existencia insuficiente"; la existencia sigue en 20 | ✅ Aprobado |
+| CP-10 | Entrada de producto | Cantidad en cero o negativa | Rechazar movimiento | Error "La cantidad debe ser mayor a cero" (0 y −3) | ✅ Aprobado |
+| CP-11 | Consultar existencias | Productos con existencia normal y bajo el mínimo | Lista con estado "Normal" / "Bajo mínimo" | P-001 "Bajo mínimo", P-002 "Normal" | ✅ Aprobado |
+| CP-12 | Reporte de inventario | Entradas y salidas registradas | Totales del reporte iguales a los movimientos | Entradas 34, salidas 5; P-001 = 30 − 5 = 25 | ✅ Aprobado |
+
+**Fecha de ejecución:** 4 de octubre de 2026 · **Resultado:** 12 de 12 casos aprobados (100 %).
+
+### Salida de la ejecución (`composer test`)
+
+```
+Módulo de inventario (entradas, salidas y existencias)
+ ✔ CP-07 Entrada de producto con cantidad válida incrementa la existencia
+ ✔ CP-08 Salida de producto con cantidad disponible reduce la existencia
+ ✔ CP-09 Salida mayor a la existencia se rechaza sin modificar la existencia
+ ✔ CP-10 Entrada con cantidad en cero o negativa se rechaza
+ ✔ CP-11 Consultar existencias indica productos normales y bajo el mínimo
+
+Módulo de productos
+ ✔ CP-01 Registrar producto con datos válidos
+ ✔ CP-02 Registrar producto con código duplicado muestra error
+ ✔ CP-03 Consultar producto con código existente
+ ✔ CP-04 Consultar producto con código inexistente muestra mensaje
+ ✔ CP-05 Modificar producto con datos válidos
+ ✔ CP-06 Eliminar producto existente
+
+Reporte de inventario (integración)
+ ✔ CP-12 Reporte básico: totales iguales a los movimientos registrados
+
+OK (12 tests, 28 assertions)
+```
 
 ## Detalle de los casos
 
