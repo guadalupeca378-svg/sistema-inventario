@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evidencias de pruebas · Los Pingüinos</title>
+<style>
+:root{--fondo:#f4f6fa;--tarjeta:#fff;--texto:#1b2333;--suave:#5b6577;--borde:#dde2ea;--azul:#1d4e89;--bien:#1e7a46;--bien-f:#e3f4ea;--mal:#b3261e;--mal-f:#fbe5e3;--pend:#8a5a00;--pend-f:#fdf1d8;--consola:#141b2b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:15px/1.55 "Segoe UI",Roboto,Arial,sans-serif}
+.cab{background:#0f1a2e;color:#fff;padding:28px 16px}
+.cab div,main{max-width:960px;margin:0 auto}
+.cab h1{margin:0 0 4px;font-size:24px}
+.cab p{margin:4px 0 0;color:#c5cee0}
+.cab a{color:#ffd27a}
+nav{position:sticky;top:0;z-index:2;background:var(--tarjeta);border-bottom:1px solid var(--borde);padding:10px 16px}
+nav div{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:6px}
+nav a{padding:4px 10px;border:1px solid var(--borde);border-radius:99px;color:var(--azul);text-decoration:none;font-weight:600;font-size:13px}
+nav a:hover{background:#eaf1fb}
+main{padding:20px 16px 48px}
+section{background:var(--tarjeta);border:1px solid var(--borde);border-radius:12px;padding:20px;margin:0 0 20px;scroll-margin-top:64px}
+section:target{outline:3px solid #ffb74d}
+section header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+h2{margin:0;font-size:22px;color:var(--azul)}
+h3{margin:18px 0 8px;font-size:15px}
+.tipo{color:var(--suave);font-size:13px}
+.req{margin:6px 0 12px;color:var(--suave)}
+.chip{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700;background:#eef1f6;color:var(--suave)}
+.chip.bien{background:var(--bien-f);color:var(--bien)}
+.chip.mal{background:var(--mal-f);color:var(--mal)}
+.chip.pend{background:var(--pend-f);color:var(--pend)}
+dl{margin:0;display:grid;gap:8px}
+.dato{display:grid;grid-template-columns:170px 1fr;gap:12px}
+dt{font-weight:600;color:var(--suave)}
+dd{margin:0}
+@media(max-width:640px){.dato{grid-template-columns:1fr;gap:0}}
+.ejec{border:1px solid var(--borde);border-radius:10px;margin:0 0 10px;overflow:hidden}
+.ejec.falla{border-color:#efb8b3}
+.ejec-cab{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 12px;background:#f8f9fc}
+.nom{font-weight:600}
+.fecha{color:var(--suave);font-size:13px}
+pre{margin:0;padding:12px;background:var(--consola);color:#d7e3ff;font:13px/1.5 Consolas,"Cascadia Mono",monospace;white-space:pre-wrap;word-break:break-word}
+.arch{display:block;padding:6px 12px;font-size:13px;color:var(--azul)}
+</style></head><body>
+<div class="cab"><div>
+<h1>Evidencias de ejecución de pruebas</h1>
+<p>Sistema de Control de Inventario · Papelería Los Pingüinos</p>
+<p>Casos ejecutados con PHPUnit, pruebas exploratorias y Playwright el 14/10/2026. Las pruebas de sistema del 16/10/2026, con capturas de pantalla, están en el <a href="../reporte-16-10-2026/index.html">reporte de Playwright</a>.</p>
+</div></div>
+<nav><div><a href="#cp-13">CP-13</a><a href="#cp-14">CP-14</a><a href="#cp-15">CP-15</a><a href="#cp-16">CP-16</a><a href="#cp-17">CP-17</a><a href="#cp-18">CP-18</a><a href="#cp-19">CP-19</a><a href="#cp-20">CP-20</a><a href="#cp-22">CP-22</a><a href="#cp-23">CP-23</a></div></nav>
+<main>
+<section id="cp-13"><header><h2>CP-13</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Integración</span></header>
+<p class="req"><b>RNF-01</b> · Conservar los datos entre sesiones (archivo JSON)</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Registrar PAP-001 con una entrada de 20 piezas y una salida de 5.<br>2. Guardar el inventario en el archivo de datos (JSON).<br>3. Cerrar y volver a abrir el inventario dos veces.<br>4. Revisar que los datos sigan iguales.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>Al volver a abrir el inventario se conservarán el producto, la existencia 15 y los 2 movimientos con su fecha, sin duplicados.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>PAP-001 con existencia 15 y 2 movimientos; sin archivos temporales.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Manuel Alfonso Castro Escalante · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-13 Guardar y volver a cargar conserva productos, existencias y movimientos con fecha</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-14"><header><h2>CP-14</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Integración</span></header>
+<p class="req"><b>RNF-01</b> · Conservar los datos entre sesiones (archivo JSON)</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Abrir el sistema sin el archivo de datos (primera vez que se usa).<br>2. Revisar qué productos aparecen.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El sistema creará el inventario con los datos de ejemplo de la papelería.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>12 productos PAP-001…PAP-012 con movimientos de ejemplo.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Manuel Alfonso Castro Escalante · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-14 El primer arranque crea el inventario con datos de ejemplo de la papelería</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-15"><header><h2>CP-15</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Unitaria</span></header>
+<p class="req"><b>RF-01</b> · Registrar productos (clave, nombre, categoría y existencia mínima)</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Capturar la clave PAP-100 y dejar el nombre solo con espacios (sin letras).<br>2. Intentar guardar el producto.<br>3. Revisar si el sistema lo guarda o lo rechaza.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El sistema no guardará el producto porque el nombre es obligatorio.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>Error: &quot;La clave y el nombre son obligatorios&quot;.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Jorge Pérez Heredia · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, primera ejecución</span><span class="fecha">14/10/2026, 6:00 p.m.</span><span class="chip bien">Pasó</span></div><pre>CP-15 nombre vacío =&gt; EXCEPCION Inventario\InventarioException: La clave y el nombre son obligatorios</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias.txt">Archivo completo: resultado-exploratorias.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-15 Registrar producto con nombre vacío se rechaza</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-16"><header><h2>CP-16</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Unitaria</span></header>
+<p class="req"><b>RF-01</b> · Registrar productos (clave, nombre, categoría y existencia mínima)</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Capturar la clave PAP-100 con nombre válido y existencia mínima −1.<br>2. Intentar guardar el producto.<br>3. Revisar si el sistema lo guarda o lo rechaza.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El sistema rechazará el registro porque la existencia mínima no puede ser negativa.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>Error: &quot;La existencia mínima no puede ser negativa&quot;.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Jorge Pérez Heredia · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, primera ejecución</span><span class="fecha">14/10/2026, 6:00 p.m.</span><span class="chip bien">Pasó</span></div><pre>CP-16 mínimo negativo =&gt; EXCEPCION Inventario\InventarioException: La existencia mínima no puede ser negativa</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias.txt">Archivo completo: resultado-exploratorias.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-16 Registrar producto con existencia mínima negativa se rechaza</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-17"><header><h2>CP-17</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Unitaria</span></header>
+<p class="req"><b>RF-03</b> · Modificar la información de un producto</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Intentar editar la clave X-1, que no existe.<br>2. Leer el mensaje que muestra el sistema.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El sistema rechazará el cambio con un mensaje de producto no encontrado.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>Error: &quot;Producto X-1 no encontrado&quot;.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Jorge Pérez Heredia · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, primera ejecución</span><span class="fecha">14/10/2026, 6:00 p.m.</span><span class="chip bien">Pasó</span></div><pre>CP-17 modificar inexistente =&gt; EXCEPCION Inventario\InventarioException: Producto X-1 no encontrado</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias.txt">Archivo completo: resultado-exploratorias.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-17 Modificar producto inexistente muestra mensaje</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-18"><header><h2>CP-18</h2><span class="chip bien">Reprueba aprobada</span><span class="tipo">Tipo: Integración</span></header>
+<p class="req"><b>RF-04</b> · Eliminar productos</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Registrar PAP-001 y hacer una entrada de 20 piezas y una salida de 5.<br>2. Eliminar el producto PAP-001.<br>3. Intentar registrar un producto nuevo con la misma clave PAP-001.<br>4. Generar el reporte y revisar sus totales.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El reporte no le asignará al producto nuevo los movimientos del producto eliminado.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>1.ª ejecución: el reporte mostró entradas 20 y salidas 5 (DEF-01). Reprueba: la clave se rechaza con mensaje, el historial se conserva y el reporte queda en 0.</dd></div><div class="dato"><dt>Defecto</dt><dd><b>DEF-01</b> · Los movimientos de un producto eliminado se quedan en el historial; si la clave se registra otra vez, el reporte se los suma al producto nuevo. <span class="chip">Cerrado</span></dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Karla Guadalupe Madrazo Can · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec falla"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, primera ejecución</span><span class="fecha">14/10/2026, 6:00 p.m.</span><span class="chip mal">Falló: se registró el defecto</span></div><pre>CP-18 eliminar y volver a registrar =&gt; tras eliminar: movimientos en historial=2, reporte entradas=0; re-registrado: entradas=20 salidas=5 existencia=0</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias.txt">Archivo completo: resultado-exploratorias.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, reprueba tras la corrección</span><span class="fecha">14/10/2026, 6:25 p.m.</span><span class="chip bien">Pasó</span></div><pre>CP-18 eliminar y volver a registrar =&gt; EXCEPCION Inventario\InventarioException: La clave PAP-001 perteneció a un producto eliminado con movimientos; usa otra clave</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias-reprueba.txt">Archivo completo: resultado-exploratorias-reprueba.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-18 Una clave eliminada con movimientos no se reutiliza ni altera el reporte</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-19"><header><h2>CP-19</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Unitaria</span></header>
+<p class="req"><b>RF-06</b> · Registrar entradas y salidas de productos</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Tener P-001 con existencia 5.<br>2. Registrar una salida de exactamente 5 piezas.<br>3. Revisar la existencia.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El sistema aceptará la salida y la existencia quedará en 0.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>Salida aceptada; existencia 0.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Karla Guadalupe Madrazo Can · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, primera ejecución</span><span class="fecha">14/10/2026, 6:00 p.m.</span><span class="chip bien">Pasó</span></div><pre>CP-19 salida igual a la existencia =&gt; existencia 0</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias.txt">Archivo completo: resultado-exploratorias.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-19 Salida igual a la existencia deja el producto en cero</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-20"><header><h2>CP-20</h2><span class="chip bien">Reprueba aprobada</span><span class="tipo">Tipo: Unitaria</span></header>
+<p class="req"><b>RF-06</b> · Registrar entradas y salidas de productos</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Tener registrado el producto P-001.<br>2. Registrar una entrada de 5 piezas con el responsable vacío, sin pasar por la pantalla, para comprobar que el sistema también lo revise por dentro.<br>3. Revisar si el movimiento se guarda o se rechaza.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>El sistema no guardará el movimiento porque todo movimiento debe tener responsable.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>1.ª ejecución: la clase aceptó el responsable vacío (DEF-02). Reprueba: error &quot;El responsable es obligatorio&quot;.</dd></div><div class="dato"><dt>Defecto</dt><dd><b>DEF-02</b> · La clase Inventario no valida el responsable; solo el formulario web lo exige. <span class="chip">Cerrado</span></dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Karla Guadalupe Madrazo Can · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec falla"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, primera ejecución</span><span class="fecha">14/10/2026, 6:00 p.m.</span><span class="chip mal">Falló: se registró el defecto</span></div><pre>CP-20 responsable vacío =&gt; aceptado, responsable=&quot;&quot;</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias.txt">Archivo completo: resultado-exploratorias.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">Pruebas exploratorias, reprueba tras la corrección</span><span class="fecha">14/10/2026, 6:25 p.m.</span><span class="chip bien">Pasó</span></div><pre>CP-20 responsable vacío =&gt; EXCEPCION Inventario\InventarioException: El responsable es obligatorio</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-exploratorias-reprueba.txt">Archivo completo: resultado-exploratorias-reprueba.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>✔ CP-20 Movimiento sin responsable se rechaza</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div></section>
+<section id="cp-22"><header><h2>CP-22</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Regresión</span></header>
+<p class="req"><b>RF-01 a RNF-01</b> · Todos los requisitos del sistema</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Después de corregir DEF-01 y DEF-02, volver a correr todas las pruebas automáticas: composer test (PHPUnit) y npm run demo (navegador).<br>2. Revisar que todas pasen, incluidas CP-18 y CP-20.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>Todos los casos saldrán aprobados, incluidos CP-18 y CP-20.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>PHPUnit 20/20 aprobadas (70 verificaciones) y Playwright 12/12 aprobadas.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Karla Guadalupe Madrazo Can · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">PHPUnit 11 (pruebas automatizadas)</span><span class="fecha">14/10/2026, 7:47 p.m.</span><span class="chip bien">Pasó</span></div><pre>PHPUnit 11.5.56 by Sebastian Bergmann and contributors.
+....................                                              20 / 20 (100%)
+OK (20 tests, 70 assertions)</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-phpunit.txt">Archivo completo: resultado-phpunit.txt</a></div><div class="ejec"><div class="ejec-cab"><span class="nom">Playwright en Microsoft Edge (navegador)</span><span class="fecha">14/10/2026, 7:48 p.m.</span><span class="chip bien">Pasó</span></div><pre>Running 18 tests using 1 worker
+18 passed (1.2m)</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-e2e.txt">Archivo completo: resultado-e2e.txt</a></div></section>
+<section id="cp-23"><header><h2>CP-23</h2><span class="chip bien">Aprobada</span><span class="tipo">Tipo: Aceptación</span></header>
+<p class="req"><b>RF-01 a RF-07</b> · Flujo completo de la papelería desde la interfaz web</p>
+<dl><div class="dato"><dt>Pasos</dt><dd>1. Registrar el producto PAP-300 desde el navegador.<br>2. Registrar una entrada de 25 piezas.<br>3. Registrar una venta de 8 piezas.<br>4. Intentar vender 30 piezas (solo hay 17).<br>5. Registrar una venta de 10 piezas.<br>6. Revisar existencias y reporte.</dd></div>
+<div class="dato"><dt>Resultado esperado</dt><dd>Cada paso se cumplirá; el producto quedará &quot;Bajo mínimo&quot; y el reporte marcará entradas 25, salidas 18 y existencia 7.</dd></div>
+<div class="dato"><dt>Resultado obtenido</dt><dd>6 de 6 pasos aprobados en Edge; el reporte muestra entradas 25, salidas 18 y existencia 7.</dd></div>
+<div class="dato"><dt>Responsable</dt><dd>Flor Yazmín Cordero Estañol · 14/10/2026</dd></div></dl>
+<h3>Salida de la ejecución</h3><div class="ejec"><div class="ejec-cab"><span class="nom">Playwright en Microsoft Edge (navegador)</span><span class="fecha">14/10/2026, 7:48 p.m.</span><span class="chip bien">Pasó</span></div><pre>✓  1 aceptacion.spec.js:44:1 › CP-23 · 1 La cliente registra un producto nuevo (6.2s)
+✓  2 aceptacion.spec.js:55:1 › CP-23 · 2 Llega mercancía: entrada de 25 piezas (4.9s)
+✓  3 aceptacion.spec.js:61:1 › CP-23 · 3 Venta: salida de 8 piezas (4.7s)
+✓  4 aceptacion.spec.js:67:1 › CP-23 · 4 No se puede vender más de lo que hay (4.8s)
+✓  5 aceptacion.spec.js:73:1 › CP-23 · 5 Existencias avisan cuando un producto queda bajo el mínimo (6.5s)
+✓  6 aceptacion.spec.js:85:1 › CP-23 · 6 El reporte cuadra con lo que se movió (1.8s)</pre><a class="arch" href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/6ff3bfe/evidencias/resultado-e2e.txt">Archivo completo: resultado-e2e.txt</a></div></section>
+</main>
+</body></html>
