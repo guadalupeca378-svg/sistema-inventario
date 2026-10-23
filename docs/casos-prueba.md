@@ -72,7 +72,7 @@ OK (20 tests, 70 assertions)
 
 ### CP-01 · Registrar producto con datos válidos
 - **Precondición:** el inventario no contiene la clave `P-001`.
-- **Pasos:** registrar `P-001`, "Tornillo 1/4", categoría "Ferretería", existencia mínima 10.
+- **Pasos:** registrar `P-001`, "Cuaderno profesional raya", categoría "Escolar", existencia mínima 10.
 - **Resultado esperado:** el producto queda registrado con existencia 0.
 - **Tipo:** funcional · **Prioridad:** alta
 
@@ -93,7 +93,7 @@ OK (20 tests, 70 assertions)
 - **Tipo:** funcional · **Prioridad:** media
 
 ### CP-05 · Modificar producto
-- **Pasos:** cambiar el nombre a "Tornillo 1/4 galvanizado" y el mínimo a 15.
+- **Pasos:** cambiar el nombre a "Cuaderno profesional cuadro chico" y el mínimo a 15.
 - **Resultado esperado:** al consultar se muestran los datos nuevos.
 - **Tipo:** funcional · **Prioridad:** alta
 

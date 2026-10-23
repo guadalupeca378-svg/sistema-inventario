@@ -20,7 +20,7 @@ final class ProductosTest extends TestCase
     protected function setUp(): void
     {
         $this->inventario = new Inventario();
-        $this->inventario->registrarProducto(new Producto('P-001', 'Tornillo 1/4', 'Ferretería', 10));
+        $this->inventario->registrarProducto(new Producto('P-001', 'Cuaderno profesional raya', 'Escolar', 10));
     }
 
     #[Group('unitaria')]
@@ -28,7 +28,7 @@ final class ProductosTest extends TestCase
     #[TestDox('CP-01 Registrar producto con datos válidos')]
     public function testRegistrarProductoConDatosValidos(): void
     {
-        $producto = $this->inventario->registrarProducto(new Producto('P-002', 'Tuerca 1/4', 'Ferretería', 5));
+        $producto = $this->inventario->registrarProducto(new Producto('P-002', 'Lápiz grafito HB', 'Escolar', 5));
 
         $this->assertSame('P-002', $producto->clave);
         $this->assertSame(0, $producto->existencia);
@@ -43,7 +43,7 @@ final class ProductosTest extends TestCase
         $this->expectException(InventarioException::class);
         $this->expectExceptionMessage('La clave P-001 ya existe');
 
-        $this->inventario->registrarProducto(new Producto('P-001', 'Otro', 'Ferretería'));
+        $this->inventario->registrarProducto(new Producto('P-001', 'Otro', 'Escolar'));
     }
 
     #[Group('unitaria')]
@@ -53,7 +53,7 @@ final class ProductosTest extends TestCase
     {
         $producto = $this->inventario->consultarProducto('P-001');
 
-        $this->assertSame('Tornillo 1/4', $producto->nombre);
+        $this->assertSame('Cuaderno profesional raya', $producto->nombre);
         $this->assertSame(10, $producto->existenciaMinima);
     }
 
@@ -73,10 +73,10 @@ final class ProductosTest extends TestCase
     #[TestDox('CP-05 Modificar producto con datos válidos')]
     public function testModificarProducto(): void
     {
-        $this->inventario->modificarProducto('P-001', 'Tornillo 1/4 galvanizado', 'Ferretería', 15);
+        $this->inventario->modificarProducto('P-001', 'Cuaderno profesional cuadro chico', 'Escolar', 15);
 
         $producto = $this->inventario->consultarProducto('P-001');
-        $this->assertSame('Tornillo 1/4 galvanizado', $producto->nombre);
+        $this->assertSame('Cuaderno profesional cuadro chico', $producto->nombre);
         $this->assertSame(15, $producto->existenciaMinima);
     }
 
@@ -100,7 +100,7 @@ final class ProductosTest extends TestCase
         $this->expectException(InventarioException::class);
         $this->expectExceptionMessage('La clave y el nombre son obligatorios');
 
-        $this->inventario->registrarProducto(new Producto('P-100', '   ', 'Ferretería'));
+        $this->inventario->registrarProducto(new Producto('P-100', '   ', 'Escolar'));
     }
 
     #[Group('unitaria')]
@@ -111,7 +111,7 @@ final class ProductosTest extends TestCase
         $this->expectException(InventarioException::class);
         $this->expectExceptionMessage('La existencia mínima no puede ser negativa');
 
-        $this->inventario->registrarProducto(new Producto('P-100', 'Clavo 1"', 'Ferretería', -1));
+        $this->inventario->registrarProducto(new Producto('P-100', 'Pluma azul punto fino', 'Escolar', -1));
     }
 
     #[Group('unitaria')]
@@ -122,7 +122,7 @@ final class ProductosTest extends TestCase
         $this->expectException(InventarioException::class);
         $this->expectExceptionMessage('Producto X-1 no encontrado');
 
-        $this->inventario->modificarProducto('X-1', 'Otro', 'Ferretería', 1);
+        $this->inventario->modificarProducto('X-1', 'Otro', 'Escolar', 1);
     }
 
     #[Group('integracion')]
@@ -135,7 +135,7 @@ final class ProductosTest extends TestCase
         $this->inventario->eliminarProducto('P-001');
 
         try {
-            $this->inventario->registrarProducto(new Producto('P-001', 'Tornillo nuevo', 'Ferretería', 10));
+            $this->inventario->registrarProducto(new Producto('P-001', 'Cuaderno profesional nuevo', 'Escolar', 10));
             $this->fail('Se esperaba rechazo de la clave P-001');
         } catch (InventarioException $e) {
             $this->assertStringContainsString('perteneció a un producto eliminado', $e->getMessage());

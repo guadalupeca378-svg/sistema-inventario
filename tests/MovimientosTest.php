@@ -20,7 +20,7 @@ final class MovimientosTest extends TestCase
     protected function setUp(): void
     {
         $this->inventario = new Inventario();
-        $this->inventario->registrarProducto(new Producto('P-001', 'Tornillo 1/4', 'Ferretería', 10));
+        $this->inventario->registrarProducto(new Producto('P-001', 'Cuaderno profesional raya', 'Escolar', 10));
     }
 
     #[Group('unitaria')]
@@ -85,7 +85,7 @@ final class MovimientosTest extends TestCase
     #[TestDox('CP-11 Consultar existencias indica productos normales y bajo el mínimo')]
     public function testConsultarExistencias(): void
     {
-        $this->inventario->registrarProducto(new Producto('P-002', 'Tuerca 1/4', 'Ferretería', 5));
+        $this->inventario->registrarProducto(new Producto('P-002', 'Lápiz grafito HB', 'Escolar', 5));
         $this->inventario->registrarEntrada('P-001', 3, 'Almacén');
         $this->inventario->registrarEntrada('P-002', 30, 'Almacén');
 

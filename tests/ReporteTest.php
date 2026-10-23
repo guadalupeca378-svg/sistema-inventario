@@ -20,8 +20,8 @@ final class ReporteTest extends TestCase
     public function testReporteCoincideConMovimientos(): void
     {
         $inventario = new Inventario();
-        $inventario->registrarProducto(new Producto('P-001', 'Tornillo 1/4', 'Ferretería', 10));
-        $inventario->registrarProducto(new Producto('P-002', 'Tuerca 1/4', 'Ferretería', 5));
+        $inventario->registrarProducto(new Producto('P-001', 'Cuaderno profesional raya', 'Escolar', 10));
+        $inventario->registrarProducto(new Producto('P-002', 'Lápiz grafito HB', 'Escolar', 5));
 
         $inventario->registrarEntrada('P-001', 20, 'Almacén');
         $inventario->registrarEntrada('P-002', 4, 'Almacén');
