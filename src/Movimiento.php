@@ -8,6 +8,8 @@ use DateTimeImmutable;
 
 /**
  * Entrada o salida de un producto. Guarda fecha y responsable.
+ *
+ * La fecha solo se indica al restaurar un movimiento guardado; si se omite se usa la actual.
  */
 final class Movimiento
 {
@@ -21,7 +23,8 @@ final class Movimiento
         public readonly string $clave,
         public readonly int $cantidad,
         public readonly string $responsable,
+        ?DateTimeImmutable $fecha = null,
     ) {
-        $this->fecha = new DateTimeImmutable();
+        $this->fecha = $fecha ?? new DateTimeImmutable();
     }
 }

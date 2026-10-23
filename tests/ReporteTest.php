@@ -7,12 +7,15 @@ namespace Inventario\Tests;
 use Inventario\Inventario;
 use Inventario\Producto;
 use Inventario\ReporteInventario;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 #[TestDox('Reporte de inventario (integración)')]
 final class ReporteTest extends TestCase
 {
+    #[Group('integracion')]
+    #[Group('CP-12')]
     #[TestDox('CP-12 Reporte básico: totales iguales a los movimientos registrados')]
     public function testReporteCoincideConMovimientos(): void
     {

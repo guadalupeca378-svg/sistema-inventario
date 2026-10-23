@@ -23,6 +23,8 @@ WORKDIR /var/www/html
 COPY --from=dependencias /app/vendor/ vendor/
 COPY src/ src/
 COPY public/ public/
+COPY templates/ templates/
+RUN mkdir -p data && chown www-data:www-data data
 
 EXPOSE 80
 HEALTHCHECK --interval=30s --timeout=5s CMD curl -f http://localhost/ || exit 1

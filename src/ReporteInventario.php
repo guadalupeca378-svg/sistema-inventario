@@ -44,8 +44,8 @@ final class ReporteInventario
 
         return [
             'productos' => $filas,
-            'totalEntradas' => array_sum($entradas),
-            'totalSalidas' => array_sum($salidas),
+            'totalEntradas' => array_sum(array_column($filas, 'entradas')),
+            'totalSalidas' => array_sum(array_column($filas, 'salidas')),
             'productosBajoMinimo' => count(array_filter($filas, static fn (array $f): bool => $f['estado'] !== 'Normal')),
         ];
     }

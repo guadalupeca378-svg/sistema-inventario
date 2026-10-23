@@ -8,6 +8,7 @@ use Inventario\Inventario;
 use Inventario\InventarioException;
 use Inventario\Movimiento;
 use Inventario\Producto;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
@@ -22,6 +23,8 @@ final class MovimientosTest extends TestCase
         $this->inventario->registrarProducto(new Producto('P-001', 'Tornillo 1/4', 'Ferretería', 10));
     }
 
+    #[Group('unitaria')]
+    #[Group('CP-07')]
     #[TestDox('CP-07 Entrada de producto con cantidad válida incrementa la existencia')]
     public function testEntradaIncrementaExistencia(): void
     {
@@ -32,6 +35,8 @@ final class MovimientosTest extends TestCase
         $this->assertSame('Almacén', $movimiento->responsable);
     }
 
+    #[Group('unitaria')]
+    #[Group('CP-08')]
     #[TestDox('CP-08 Salida de producto con cantidad disponible reduce la existencia')]
     public function testSalidaReduceExistencia(): void
     {
@@ -41,6 +46,8 @@ final class MovimientosTest extends TestCase
         $this->assertSame(15, $this->inventario->consultarProducto('P-001')->existencia);
     }
 
+    #[Group('unitaria')]
+    #[Group('CP-09')]
     #[TestDox('CP-09 Salida mayor a la existencia se rechaza sin modificar la existencia')]
     public function testSalidaMayorALaExistenciaSeRechaza(): void
     {
@@ -56,6 +63,8 @@ final class MovimientosTest extends TestCase
         $this->assertSame(20, $this->inventario->consultarProducto('P-001')->existencia);
     }
 
+    #[Group('unitaria')]
+    #[Group('CP-10')]
     #[TestDox('CP-10 Entrada con cantidad en cero o negativa se rechaza')]
     public function testEntradaConCantidadInvalida(): void
     {
@@ -71,6 +80,8 @@ final class MovimientosTest extends TestCase
         $this->assertSame(0, $this->inventario->consultarProducto('P-001')->existencia);
     }
 
+    #[Group('unitaria')]
+    #[Group('CP-11')]
     #[TestDox('CP-11 Consultar existencias indica productos normales y bajo el mínimo')]
     public function testConsultarExistencias(): void
     {
@@ -81,5 +92,34 @@ final class MovimientosTest extends TestCase
         $existencias = array_column($this->inventario->consultarExistencias(), 'estado', 'clave');
 
         $this->assertSame(['P-001' => 'Bajo mínimo', 'P-002' => 'Normal'], $existencias);
+    }
+
+    #[Group('unitaria')]
+    #[Group('CP-19')]
+    #[TestDox('CP-19 Salida igual a la existencia deja el producto en cero')]
+    public function testSalidaIgualALaExistencia(): void
+    {
+        $this->inventario->registrarEntrada('P-001', 5, 'Almacén');
+        $this->inventario->registrarSalida('P-001', 5, 'Ventas');
+
+        $this->assertSame(0, $this->inventario->consultarProducto('P-001')->existencia);
+    }
+
+    #[Group('unitaria')]
+    #[Group('CP-20')]
+    #[TestDox('CP-20 Movimiento sin responsable se rechaza')]
+    public function testMovimientoSinResponsable(): void
+    {
+        foreach (['', '   '] as $responsable) {
+            try {
+                $this->inventario->registrarEntrada('P-001', 5, $responsable);
+                $this->fail('Se esperaba rechazo por responsable vacío');
+            } catch (InventarioException $e) {
+                $this->assertSame('El responsable es obligatorio', $e->getMessage());
+            }
+        }
+
+        $this->assertSame(0, $this->inventario->consultarProducto('P-001')->existencia);
+        $this->assertCount(0, $this->inventario->movimientos());
     }
 }

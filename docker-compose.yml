@@ -13,6 +13,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-cambiar_en_produccion}
     depends_on:
       - db
+    volumes:
+      - datos-app:/var/www/html/data
 
   db:
     image: postgres:16
@@ -28,3 +30,4 @@ services:
 
 volumes:
   datos-inventario:
+  datos-app:

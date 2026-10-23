@@ -20,7 +20,11 @@
         }
     },
     "scripts": {
-        "test": "phpunit --testdox --colors=always"
+        "test": "phpunit --testdox --colors=always",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -S localhost:8000 -t public"
+        ]
     },
     "config": {
         "sort-packages": true

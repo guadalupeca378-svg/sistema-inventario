@@ -23,6 +23,15 @@ final class Inventario
         if (isset($this->productos[$producto->clave])) {
             throw new InventarioException("La clave {$producto->clave} ya existe");
         }
+        // El historial de un producto eliminado se conserva; reutilizar su clave mezclaría
+        // esos movimientos con los del producto nuevo en el reporte (DEF-01).
+        foreach ($this->movimientos as $m) {
+            if ($m->clave === $producto->clave) {
+                throw new InventarioException(
+                    "La clave {$producto->clave} perteneció a un producto eliminado con movimientos; usa otra clave"
+                );
+            }
+        }
 
         return $this->productos[$producto->clave] = $producto;
     }
@@ -56,6 +65,7 @@ final class Inventario
     public function registrarEntrada(string $clave, int $cantidad, string $responsable): Movimiento
     {
         $this->validarCantidad($cantidad);
+        $this->validarResponsable($responsable);
         $producto = $this->consultarProducto($clave);
 
         $producto->existencia += $cantidad;
@@ -66,6 +76,7 @@ final class Inventario
     public function registrarSalida(string $clave, int $cantidad, string $responsable): Movimiento
     {
         $this->validarCantidad($cantidad);
+        $this->validarResponsable($responsable);
         $producto = $this->consultarProducto($clave);
 
         if ($cantidad > $producto->existencia) {
@@ -99,10 +110,27 @@ final class Inventario
         return $this->movimientos;
     }
 
+    /**
+     * Agrega al historial un movimiento ya aplicado. Uso exclusivo de la persistencia
+     * (AlmacenJson): no valida ni modifica existencias.
+     */
+    public function restaurarMovimiento(Movimiento $movimiento): void
+    {
+        $this->movimientos[] = $movimiento;
+    }
+
     private function validarCantidad(int $cantidad): void
     {
         if ($cantidad <= 0) {
             throw new InventarioException('La cantidad debe ser mayor a cero');
+        }
+    }
+
+    /** Todo movimiento debe guardar quién lo hizo (DEF-02). */
+    private function validarResponsable(string $responsable): void
+    {
+        if (trim($responsable) === '') {
+            throw new InventarioException('El responsable es obligatorio');
         }
     }
 }

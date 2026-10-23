@@ -1,0 +1,20 @@
+{
+  "name": "sistema-inventario-e2e",
+  "private": true,
+  "description": "Pruebas funcionales de punta a punta (navegador) del Sistema de Control de Inventario",
+  "scripts": {
+    "prueba:unitaria": "php vendor/bin/phpunit --testdox --group unitaria",
+    "prueba:integracion": "php vendor/bin/phpunit --testdox --group integracion",
+    "prueba:sistema": "playwright test inventario.spec.js --headed",
+    "prueba:aceptacion": "playwright test aceptacion.spec.js --headed",
+    "prueba:regresion": "php vendor/bin/phpunit --testdox && playwright test",
+    "presentacion": "node presentacion.js",
+    "presentacion:pausas": "node presentacion.js --pausas",
+    "demo": "playwright test --headed && playwright show-report reporte-e2e",
+    "pruebas:e2e": "playwright test",
+    "reporte": "playwright show-report reporte-e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.48.2"
+  }
+}

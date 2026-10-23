@@ -22,8 +22,17 @@ Cada caso está automatizado en la carpeta `tests/` y se identifica con su ID en
 | CP-10 | Entrada de producto | Cantidad en cero o negativa | Rechazar movimiento | Error "La cantidad debe ser mayor a cero" (0 y −3) | ✅ Aprobado |
 | CP-11 | Consultar existencias | Productos con existencia normal y bajo el mínimo | Lista con estado "Normal" / "Bajo mínimo" | P-001 "Bajo mínimo", P-002 "Normal" | ✅ Aprobado |
 | CP-12 | Reporte de inventario | Entradas y salidas registradas | Totales del reporte iguales a los movimientos | Entradas 34, salidas 5; P-001 = 30 − 5 = 25 | ✅ Aprobado |
+| CP-13 | Persistencia de datos | Inventario con productos, entradas y salidas guardado en JSON | Al volver a cargar se conservan productos, existencias y movimientos con fecha, sin duplicarlos | PAP-001 con existencia 15, 2 movimientos y la misma fecha; sin archivos temporales | ✅ Aprobado |
+| CP-14 | Primer arranque | Archivo de datos inexistente | Se crea el inventario con datos de ejemplo de la papelería | 12 productos PAP-001…PAP-012, movimientos de ejemplo y productos bajo mínimo; existencia = entradas − salidas | ✅ Aprobado |
+| CP-15 | Registrar producto | Nombre formado solo por espacios | Rechazar el registro | Error "La clave y el nombre son obligatorios" | ✅ Aprobado |
+| CP-16 | Registrar producto | Existencia mínima −1 | Rechazar el registro | Error "La existencia mínima no puede ser negativa" | ✅ Aprobado |
+| CP-17 | Modificar producto | Clave inexistente `X-1` | Mensaje de producto no encontrado | Error "Producto X-1 no encontrado" | ✅ Aprobado |
+| CP-18 | Eliminar producto | Eliminar un producto con movimientos y registrar otro con la misma clave | El reporte no mezcla los movimientos del producto eliminado | 1.ª ejecución falló (DEF-01); tras la corrección la clave se rechaza y el historial se conserva | ✅ Reprueba aprobada |
+| CP-19 | Salida de producto | Salida igual a la existencia (5 de 5) | Aceptar y dejar existencia 0 | Existencia 0 | ✅ Aprobado |
+| CP-20 | Entrada de producto | Responsable vacío | Rechazar el movimiento | 1.ª ejecución falló (DEF-02); tras la corrección: "El responsable es obligatorio" | ✅ Reprueba aprobada |
+| CP-23 | Aceptación (navegador) | Lista de la cliente: registrar, entrada 25, ventas 8 y 10, intento de vender 30, existencias y reporte | Cada paso se cumple; reporte con entradas 25, salidas 18 y existencia 7 | 6 de 6 pasos aprobados en Edge (`e2e/aceptacion.spec.js`) | ✅ Aprobado |
 
-**Fecha de ejecución:** 4 de octubre de 2026 · **Resultado:** 12 de 12 casos aprobados (100 %).
+**Fecha de ejecución:** 14 de octubre de 2026 · **Resultado:** 20 de 20 casos aprobados (100 %), incluidas las repruebas de DEF-01 y DEF-02. Pruebas en navegador (Playwright): 12 de 12 aprobadas.
 
 ### Salida de la ejecución (`composer test`)
 
@@ -34,6 +43,8 @@ Módulo de inventario (entradas, salidas y existencias)
  ✔ CP-09 Salida mayor a la existencia se rechaza sin modificar la existencia
  ✔ CP-10 Entrada con cantidad en cero o negativa se rechaza
  ✔ CP-11 Consultar existencias indica productos normales y bajo el mínimo
+ ✔ CP-19 Salida igual a la existencia deja el producto en cero
+ ✔ CP-20 Movimiento sin responsable se rechaza
 
 Módulo de productos
  ✔ CP-01 Registrar producto con datos válidos
@@ -42,11 +53,19 @@ Módulo de productos
  ✔ CP-04 Consultar producto con código inexistente muestra mensaje
  ✔ CP-05 Modificar producto con datos válidos
  ✔ CP-06 Eliminar producto existente
+ ✔ CP-15 Registrar producto con nombre vacío se rechaza
+ ✔ CP-16 Registrar producto con existencia mínima negativa se rechaza
+ ✔ CP-17 Modificar producto inexistente muestra mensaje
+ ✔ CP-18 Una clave eliminada con movimientos no se reutiliza ni altera el reporte
+
+Persistencia del inventario en JSON
+ ✔ CP-13 Guardar y volver a cargar conserva productos, existencias y movimientos con fecha
+ ✔ CP-14 El primer arranque crea el inventario con datos de ejemplo de la papelería
 
 Reporte de inventario (integración)
  ✔ CP-12 Reporte básico: totales iguales a los movimientos registrados
 
-OK (12 tests, 28 assertions)
+OK (20 tests, 70 assertions)
 ```
 
 ## Detalle de los casos
@@ -113,3 +132,19 @@ OK (12 tests, 28 assertions)
 - **Resultado esperado:** total de entradas, total de salidas y existencia de cada producto coinciden con
   los movimientos.
 - **Tipo:** integración · **Prioridad:** alta
+
+### CP-13 · Guardar y volver a cargar el inventario
+- **Precondición:** archivo de datos temporal vacío.
+- **Pasos:** registrar `PAP-001`, una entrada de 20 y una salida de 5; guardar con `AlmacenJson`, volver a
+  cargar, guardar y cargar otra vez.
+- **Resultado esperado:** el producto conserva nombre, categoría, mínimo y existencia 15; hay exactamente
+  2 movimientos con su tipo, responsable y fecha original; no quedan archivos temporales.
+- **Tipo:** integración (persistencia) · **Prioridad:** alta
+
+### CP-14 · Primer arranque con datos de ejemplo
+- **Precondición:** el archivo de datos no existe.
+- **Pasos:** cargar el inventario con `AlmacenJson`.
+- **Resultado esperado:** se crea el archivo con los productos de ejemplo de Papelería Los Pingüinos
+  (categorías Escolar, Oficina, Papel y Arte), movimientos con responsables y al menos un producto bajo
+  el mínimo; en el reporte, la existencia de cada producto es igual a entradas − salidas.
+- **Tipo:** funcional · **Prioridad:** media

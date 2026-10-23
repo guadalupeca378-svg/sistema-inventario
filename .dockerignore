@@ -5,3 +5,8 @@ tests
 docs
 *.md
 .phpunit.cache
+data
+node_modules/
+reporte-e2e/
+test-results/
+e2e/

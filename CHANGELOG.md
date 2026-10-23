@@ -3,6 +3,17 @@
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y
 [Versionado Semántico](https://semver.org/lang/es/).
 
+## [Sin publicar]
+
+### Agregado
+- Interfaz web "Papelería Los Pingüinos" con persistencia en archivo JSON y pruebas en navegador (Playwright).
+- Casos de prueba CP-13 a CP-20 automatizados con PHPUnit (20 casos, 70 verificaciones).
+
+### Corregido
+- DEF-01: una clave de un producto eliminado con movimientos ya no se puede volver a registrar; antes el
+  reporte le sumaba al producto nuevo las entradas y salidas del eliminado.
+- DEF-02: la clase `Inventario` rechaza entradas y salidas sin responsable.
+
 ## [1.0.0] - 2026-10-04
 
 ### Agregado

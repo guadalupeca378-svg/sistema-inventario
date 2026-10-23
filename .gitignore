@@ -24,3 +24,11 @@
 !.vscode/settings.json
 .DS_Store
 Thumbs.db
+
+# Datos de la aplicación (inventario guardado en JSON)
+/data/
+
+# Pruebas de navegador (Playwright)
+node_modules/
+reporte-e2e/
+test-results/
