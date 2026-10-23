@@ -1,0 +1,26 @@
+
+Running 18 tests using 1 worker
+
+  ✓  1 aceptacion.spec.js:44:1 › CP-23 · 1 La cliente registra un producto nuevo (6.2s)
+  ✓  2 aceptacion.spec.js:55:1 › CP-23 · 2 Llega mercancía: entrada de 25 piezas (4.9s)
+  ✓  3 aceptacion.spec.js:61:1 › CP-23 · 3 Venta: salida de 8 piezas (4.7s)
+  ✓  4 aceptacion.spec.js:67:1 › CP-23 · 4 No se puede vender más de lo que hay (4.8s)
+  ✓  5 aceptacion.spec.js:73:1 › CP-23 · 5 Existencias avisan cuando un producto queda bajo el mínimo (6.5s)
+  ✓  6 aceptacion.spec.js:85:1 › CP-23 · 6 El reporte cuadra con lo que se movió (1.8s)
+  ✓  7 inventario.spec.js:35:1 › CP-01 Registrar producto con datos válidos (6.1s)
+  ✓  8 inventario.spec.js:47:1 › CP-02 Registrar producto con código duplicado muestra error (4.1s)
+  ✓  9 inventario.spec.js:57:1 › CP-03 Consultar producto existente con el buscador (2.3s)
+  ✓  10 inventario.spec.js:67:1 › CP-04 Consultar producto inexistente muestra mensaje (1.5s)
+  ✓  11 inventario.spec.js:73:1 › CP-05 Modificar producto con datos válidos (4.4s)
+  ✓  12 inventario.spec.js:83:1 › CP-07 Entrada de producto incrementa la existencia (3.7s)
+  ✓  13 inventario.spec.js:94:1 › CP-08 Salida de producto reduce la existencia (1.7s)
+  ✓  14 inventario.spec.js:103:1 › CP-09 Salida mayor a la existencia se rechaza (1.8s)
+  ✓  15 inventario.spec.js:112:1 › CP-10 Cantidad en cero no se acepta (2.0s)
+  ✓  16 inventario.spec.js:124:1 › CP-11 Consultar existencias indica el estado (1.8s)
+  ✓  17 inventario.spec.js:134:1 › CP-12 Reporte coincide con los movimientos (1.8s)
+  ✓  18 inventario.spec.js:145:1 › CP-06 Eliminar producto existente (2.7s)
+
+  Slow test file: inventario.spec.js (34.0s)
+  Slow test file: aceptacion.spec.js (28.8s)
+  Consider splitting slow test files to speed up parallel execution
+  18 passed (1.2m)

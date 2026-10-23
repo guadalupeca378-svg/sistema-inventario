@@ -1,0 +1,38 @@
+PHPUnit 11.5.56 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.34
+Configuration: C:\Users\KARLA\Desktop\zarao_k\sistema-inventario\phpunit.xml
+
+....................                                              20 / 20 (100%)
+
+Time: 00:00.157, Memory: 8.00 MB
+
+Módulo de inventario (entradas, salidas y existencias)
+ ✔ CP-07 Entrada de producto con cantidad válida incrementa la existencia
+ ✔ CP-08 Salida de producto con cantidad disponible reduce la existencia
+ ✔ CP-09 Salida mayor a la existencia se rechaza sin modificar la existencia
+ ✔ CP-10 Entrada con cantidad en cero o negativa se rechaza
+ ✔ CP-11 Consultar existencias indica productos normales y bajo el mínimo
+ ✔ CP-19 Salida igual a la existencia deja el producto en cero
+ ✔ CP-20 Movimiento sin responsable se rechaza
+
+Módulo de productos
+ ✔ CP-01 Registrar producto con datos válidos
+ ✔ CP-02 Registrar producto con código duplicado muestra error
+ ✔ CP-03 Consultar producto con código existente
+ ✔ CP-04 Consultar producto con código inexistente muestra mensaje
+ ✔ CP-05 Modificar producto con datos válidos
+ ✔ CP-06 Eliminar producto existente
+ ✔ CP-15 Registrar producto con nombre vacío se rechaza
+ ✔ CP-16 Registrar producto con existencia mínima negativa se rechaza
+ ✔ CP-17 Modificar producto inexistente muestra mensaje
+ ✔ CP-18 Una clave eliminada con movimientos no se reutiliza ni altera el reporte
+
+Persistencia del inventario en JSON
+ ✔ CP-13 Guardar y volver a cargar conserva productos, existencias y movimientos con fecha
+ ✔ CP-14 El primer arranque crea el inventario con datos de ejemplo de la papelería
+
+Reporte de inventario (integración)
+ ✔ CP-12 Reporte básico: totales iguales a los movimientos registrados
+
+OK (20 tests, 70 assertions)

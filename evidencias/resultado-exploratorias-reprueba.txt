@@ -1,0 +1,8 @@
+CP-15 nombre vacío => EXCEPCION Inventario\InventarioException: La clave y el nombre son obligatorios
+CP-16 mínimo negativo => EXCEPCION Inventario\InventarioException: La existencia mínima no puede ser negativa
+CP-17 modificar inexistente => EXCEPCION Inventario\InventarioException: Producto X-1 no encontrado
+Extra salida negativa => EXCEPCION Inventario\InventarioException: La cantidad debe ser mayor a cero
+CP-19 salida igual a la existencia => existencia 0
+Extra movimiento a clave inexistente => EXCEPCION Inventario\InventarioException: Producto NOPE no encontrado
+CP-20 responsable vacío => EXCEPCION Inventario\InventarioException: El responsable es obligatorio
+CP-18 eliminar y volver a registrar => EXCEPCION Inventario\InventarioException: La clave PAP-001 perteneció a un producto eliminado con movimientos; usa otra clave
