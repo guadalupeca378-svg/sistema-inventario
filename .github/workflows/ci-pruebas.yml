@@ -1,0 +1,116 @@
+# Flujo de integración continua del Sistema de Control de Inventario
+# Se copia en el repositorio como .github/workflows/ci-pruebas.yml
+# Se dispara solo cada vez que alguien sube cambios o abre un pull request.
+
+name: CI - Pruebas automáticas del inventario
+
+on:
+  push:
+    branches: [ main, develop, 'feature/**', release ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  unitarias:
+    name: 1. Pruebas unitarias (PHPUnit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Instalar dependencias
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Ejecutar pruebas unitarias
+        run: vendor/bin/phpunit --testdox --group unitaria --log-junit junit-unitarias.xml
+
+      - name: Guardar resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-unitarias
+          path: junit-unitarias.xml
+
+  integracion:
+    name: 2. Pruebas de integración (PHPUnit)
+    runs-on: ubuntu-latest
+    needs: unitarias
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Instalar dependencias
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Ejecutar pruebas de integración
+        run: vendor/bin/phpunit --testdox --group integracion --log-junit junit-integracion.xml
+
+      - name: Guardar resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-integracion
+          path: junit-integracion.xml
+
+  sistema-aceptacion:
+    name: 3. Pruebas de sistema y aceptación (Playwright)
+    runs-on: ubuntu-latest
+    needs: integracion
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar dependencias
+        run: |
+          composer install --prefer-dist --no-progress --no-interaction
+          npm ci
+          npx playwright install --with-deps msedge
+
+      - name: Ejecutar pruebas en el navegador
+        env:
+          LENTO: '0'
+        run: npx playwright test
+
+      - name: Publicar reporte HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-playwright
+          path: reporte-e2e/
+          retention-days: 30
+
+  imagen-docker:
+    name: 4. Construir imagen (solo si todo pasó)
+    runs-on: ubuntu-latest
+    needs: sistema-aceptacion
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Construir imagen
+        run: docker build -t sistema-inventario:${{ github.sha }} .
+
+      - name: Verificar que el contenedor responde
+        run: |
+          docker run -d --name inventario -p 8080:80 sistema-inventario:${{ github.sha }}
+          sleep 5
+          curl --fail --silent http://localhost:8080/ | grep "Sistema de Control de Inventario"
+          docker stop inventario
