@@ -10,27 +10,27 @@ Cada caso está automatizado en la carpeta `tests/` y se identifica con su ID en
 
 | ID | Funcionalidad | Entrada | Resultado esperado | Resultado obtenido | Estado |
 |---|---|---|---|---|---|
-| CP-01 | Registrar producto | Datos válidos (clave `P-001`, nombre, categoría, existencia mínima) | Producto registrado | Producto P-002 registrado con existencia 0 | ✅ Aprobado |
-| CP-02 | Registrar producto | Código duplicado (`P-001` ya existe) | Mostrar error "La clave ya existe" | Error: "La clave P-001 ya existe" | ✅ Aprobado |
-| CP-03 | Consultar producto | Código existente (`P-001`) | Mostrar producto | Se muestran nombre, categoría y mínimo de P-001 | ✅ Aprobado |
-| CP-04 | Consultar producto | Código inexistente (`P-999`) | Mostrar mensaje "Producto no encontrado" | Mensaje: "Producto P-999 no encontrado" | ✅ Aprobado |
-| CP-05 | Modificar producto | Datos válidos (nuevo nombre y mínimo) | Información actualizada | Nombre y mínimo actualizados | ✅ Aprobado |
-| CP-06 | Eliminar producto | Producto existente | Producto eliminado | P-001 eliminado; la consulta lo reporta como no encontrado | ✅ Aprobado |
-| CP-07 | Entrada de producto | Cantidad válida (+20) | Incrementar existencia | Existencia 0 → 20; movimiento con fecha y responsable | ✅ Aprobado |
-| CP-08 | Salida de producto | Cantidad disponible (−5 de 20) | Reducir existencia | Existencia 20 → 15 | ✅ Aprobado |
-| CP-09 | Salida de producto | Cantidad mayor a la existencia (−50 de 20) | Rechazar movimiento, existencia sin cambio | Error "Existencia insuficiente"; la existencia sigue en 20 | ✅ Aprobado |
-| CP-10 | Entrada de producto | Cantidad en cero o negativa | Rechazar movimiento | Error "La cantidad debe ser mayor a cero" (0 y −3) | ✅ Aprobado |
-| CP-11 | Consultar existencias | Productos con existencia normal y bajo el mínimo | Lista con estado "Normal" / "Bajo mínimo" | P-001 "Bajo mínimo", P-002 "Normal" | ✅ Aprobado |
-| CP-12 | Reporte de inventario | Entradas y salidas registradas | Totales del reporte iguales a los movimientos | Entradas 34, salidas 5; P-001 = 30 − 5 = 25 | ✅ Aprobado |
-| CP-13 | Persistencia de datos | Inventario con productos, entradas y salidas guardado en JSON | Al volver a cargar se conservan productos, existencias y movimientos con fecha, sin duplicarlos | PAP-001 con existencia 15, 2 movimientos y la misma fecha; sin archivos temporales | ✅ Aprobado |
-| CP-14 | Primer arranque | Archivo de datos inexistente | Se crea el inventario con datos de ejemplo de la papelería | 12 productos PAP-001…PAP-012, movimientos de ejemplo y productos bajo mínimo; existencia = entradas − salidas | ✅ Aprobado |
-| CP-15 | Registrar producto | Nombre formado solo por espacios | Rechazar el registro | Error "La clave y el nombre son obligatorios" | ✅ Aprobado |
-| CP-16 | Registrar producto | Existencia mínima −1 | Rechazar el registro | Error "La existencia mínima no puede ser negativa" | ✅ Aprobado |
-| CP-17 | Modificar producto | Clave inexistente `X-1` | Mensaje de producto no encontrado | Error "Producto X-1 no encontrado" | ✅ Aprobado |
-| CP-18 | Eliminar producto | Eliminar un producto con movimientos y registrar otro con la misma clave | El reporte no mezcla los movimientos del producto eliminado | 1.ª ejecución falló (DEF-01); tras la corrección la clave se rechaza y el historial se conserva | ✅ Reprueba aprobada |
-| CP-19 | Salida de producto | Salida igual a la existencia (5 de 5) | Aceptar y dejar existencia 0 | Existencia 0 | ✅ Aprobado |
-| CP-20 | Entrada de producto | Responsable vacío | Rechazar el movimiento | 1.ª ejecución falló (DEF-02); tras la corrección: "El responsable es obligatorio" | ✅ Reprueba aprobada |
-| CP-23 | Aceptación (navegador) | Lista de la cliente: registrar, entrada 25, ventas 8 y 10, intento de vender 30, existencias y reporte | Cada paso se cumple; reporte con entradas 25, salidas 18 y existencia 7 | 6 de 6 pasos aprobados en Edge (`e2e/aceptacion.spec.js`) | ✅ Aprobado |
+| CP-01 | Registrar producto | Datos válidos (clave `P-001`, nombre, categoría, existencia mínima) | Producto registrado | Producto P-002 registrado con existencia 0 | Aprobado |
+| CP-02 | Registrar producto | Código duplicado (`P-001` ya existe) | Mostrar error "La clave ya existe" | Error: "La clave P-001 ya existe" | Aprobado |
+| CP-03 | Consultar producto | Código existente (`P-001`) | Mostrar producto | Se muestran nombre, categoría y mínimo de P-001 | Aprobado |
+| CP-04 | Consultar producto | Código inexistente (`P-999`) | Mostrar mensaje "Producto no encontrado" | Mensaje: "Producto P-999 no encontrado" | Aprobado |
+| CP-05 | Modificar producto | Datos válidos (nuevo nombre y mínimo) | Información actualizada | Nombre y mínimo actualizados | Aprobado |
+| CP-06 | Eliminar producto | Producto existente | Producto eliminado | P-001 eliminado; la consulta lo reporta como no encontrado | Aprobado |
+| CP-07 | Entrada de producto | Cantidad válida (+20) | Incrementar existencia | Existencia 0 → 20; movimiento con fecha y responsable | Aprobado |
+| CP-08 | Salida de producto | Cantidad disponible (−5 de 20) | Reducir existencia | Existencia 20 → 15 | Aprobado |
+| CP-09 | Salida de producto | Cantidad mayor a la existencia (−50 de 20) | Rechazar movimiento, existencia sin cambio | Error "Existencia insuficiente"; la existencia sigue en 20 | Aprobado |
+| CP-10 | Entrada de producto | Cantidad en cero o negativa | Rechazar movimiento | Error "La cantidad debe ser mayor a cero" (0 y −3) | Aprobado |
+| CP-11 | Consultar existencias | Productos con existencia normal y bajo el mínimo | Lista con estado "Normal" / "Bajo mínimo" | P-001 "Bajo mínimo", P-002 "Normal" | Aprobado |
+| CP-12 | Reporte de inventario | Entradas y salidas registradas | Totales del reporte iguales a los movimientos | Entradas 34, salidas 5; P-001 = 30 − 5 = 25 | Aprobado |
+| CP-13 | Persistencia de datos | Inventario con productos, entradas y salidas guardado en JSON | Al volver a cargar se conservan productos, existencias y movimientos con fecha, sin duplicarlos | PAP-001 con existencia 15, 2 movimientos y la misma fecha; sin archivos temporales | Aprobado |
+| CP-14 | Primer arranque | Archivo de datos inexistente | Se crea el inventario con datos de ejemplo de la papelería | 12 productos PAP-001…PAP-012, movimientos de ejemplo y productos bajo mínimo; existencia = entradas − salidas | Aprobado |
+| CP-15 | Registrar producto | Nombre formado solo por espacios | Rechazar el registro | Error "La clave y el nombre son obligatorios" | Aprobado |
+| CP-16 | Registrar producto | Existencia mínima −1 | Rechazar el registro | Error "La existencia mínima no puede ser negativa" | Aprobado |
+| CP-17 | Modificar producto | Clave inexistente `X-1` | Mensaje de producto no encontrado | Error "Producto X-1 no encontrado" | Aprobado |
+| CP-18 | Eliminar producto | Eliminar un producto con movimientos y registrar otro con la misma clave | El reporte no mezcla los movimientos del producto eliminado | 1.ª ejecución falló (DEF-01); tras la corrección la clave se rechaza y el historial se conserva | Reprueba aprobada |
+| CP-19 | Salida de producto | Salida igual a la existencia (5 de 5) | Aceptar y dejar existencia 0 | Existencia 0 | Aprobado |
+| CP-20 | Entrada de producto | Responsable vacío | Rechazar el movimiento | 1.ª ejecución falló (DEF-02); tras la corrección: "El responsable es obligatorio" | Reprueba aprobada |
+| CP-23 | Aceptación (navegador) | Lista de la cliente: registrar, entrada 25, ventas 8 y 10, intento de vender 30, existencias y reporte | Cada paso se cumple; reporte con entradas 25, salidas 18 y existencia 7 | 6 de 6 pasos aprobados en Edge (`e2e/aceptacion.spec.js`) | Aprobado |
 
 **Fecha de ejecución:** 14 de octubre de 2026 · **Resultado:** 20 de 20 casos aprobados (100 %), incluidas las repruebas de DEF-01 y DEF-02. Pruebas en navegador (Playwright): 12 de 12 aprobadas.
 
@@ -38,32 +38,32 @@ Cada caso está automatizado en la carpeta `tests/` y se identifica con su ID en
 
 ```
 Módulo de inventario (entradas, salidas y existencias)
- ✔ CP-07 Entrada de producto con cantidad válida incrementa la existencia
- ✔ CP-08 Salida de producto con cantidad disponible reduce la existencia
- ✔ CP-09 Salida mayor a la existencia se rechaza sin modificar la existencia
- ✔ CP-10 Entrada con cantidad en cero o negativa se rechaza
- ✔ CP-11 Consultar existencias indica productos normales y bajo el mínimo
- ✔ CP-19 Salida igual a la existencia deja el producto en cero
- ✔ CP-20 Movimiento sin responsable se rechaza
+ OK CP-07 Entrada de producto con cantidad válida incrementa la existencia
+ OK CP-08 Salida de producto con cantidad disponible reduce la existencia
+ OK CP-09 Salida mayor a la existencia se rechaza sin modificar la existencia
+ OK CP-10 Entrada con cantidad en cero o negativa se rechaza
+ OK CP-11 Consultar existencias indica productos normales y bajo el mínimo
+ OK CP-19 Salida igual a la existencia deja el producto en cero
+ OK CP-20 Movimiento sin responsable se rechaza
 
 Módulo de productos
- ✔ CP-01 Registrar producto con datos válidos
- ✔ CP-02 Registrar producto con código duplicado muestra error
- ✔ CP-03 Consultar producto con código existente
- ✔ CP-04 Consultar producto con código inexistente muestra mensaje
- ✔ CP-05 Modificar producto con datos válidos
- ✔ CP-06 Eliminar producto existente
- ✔ CP-15 Registrar producto con nombre vacío se rechaza
- ✔ CP-16 Registrar producto con existencia mínima negativa se rechaza
- ✔ CP-17 Modificar producto inexistente muestra mensaje
- ✔ CP-18 Una clave eliminada con movimientos no se reutiliza ni altera el reporte
+ OK CP-01 Registrar producto con datos válidos
+ OK CP-02 Registrar producto con código duplicado muestra error
+ OK CP-03 Consultar producto con código existente
+ OK CP-04 Consultar producto con código inexistente muestra mensaje
+ OK CP-05 Modificar producto con datos válidos
+ OK CP-06 Eliminar producto existente
+ OK CP-15 Registrar producto con nombre vacío se rechaza
+ OK CP-16 Registrar producto con existencia mínima negativa se rechaza
+ OK CP-17 Modificar producto inexistente muestra mensaje
+ OK CP-18 Una clave eliminada con movimientos no se reutiliza ni altera el reporte
 
 Persistencia del inventario en JSON
- ✔ CP-13 Guardar y volver a cargar conserva productos, existencias y movimientos con fecha
- ✔ CP-14 El primer arranque crea el inventario con datos de ejemplo de la papelería
+ OK CP-13 Guardar y volver a cargar conserva productos, existencias y movimientos con fecha
+ OK CP-14 El primer arranque crea el inventario con datos de ejemplo de la papelería
 
 Reporte de inventario (integración)
- ✔ CP-12 Reporte básico: totales iguales a los movimientos registrados
+ OK CP-12 Reporte básico: totales iguales a los movimientos registrados
 
 OK (20 tests, 70 assertions)
 ```

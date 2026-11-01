@@ -27,7 +27,7 @@ test.afterEach(async ({}, testInfo) => {
 });
 
 test.afterAll(async () => {
-  await caso('✅ Pruebas terminadas');
+  await caso('Pruebas terminadas');
   await page.waitForTimeout(2500);
   await page.close();
 });

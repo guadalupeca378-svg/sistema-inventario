@@ -19,7 +19,7 @@ function crearAyudas(obtenerPagina) {
           'font:600 20px/1.2 Roboto,system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.35);pointer-events:none';
         document.body.appendChild(el);
       }
-      el.textContent = '🐧 ' + texto;
+      el.textContent = texto;
     }, letrero).catch(() => {});
   }
 

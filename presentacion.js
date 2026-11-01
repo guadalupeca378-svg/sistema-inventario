@@ -59,7 +59,7 @@ function encabezado(n, tipo) {
 }
 
 (async () => {
-  console.log(c('1;33', '\n  🐧 PAPELERÍA LOS PINGÜINOS · PRUEBAS AUTOMATIZADAS DEL SISTEMA DE INVENTARIO'));
+  console.log(c('1;33', '\n  PAPELERÍA LOS PINGÜINOS · PRUEBAS AUTOMATIZADAS DEL SISTEMA DE INVENTARIO'));
   const resultados = [];
 
   for (const [i, tipo] of TIPOS.entries()) {
@@ -77,7 +77,7 @@ function encabezado(n, tipo) {
 
   console.log('\n' + c('1;33', '  RESUMEN'));
   for (const r of resultados) {
-    const estado = r.ok ? c('1;32', '✔ APROBADA') : c('1;31', '✘ FALLIDA ');
+    const estado = r.ok ? c('1;32', 'APROBADA') : c('1;31', 'FALLIDA ');
     console.log(`  ${estado}  ${r.tipo.padEnd(26)} ${c('2', `${r.segundos} s`)}`);
   }
   const todas = resultados.every((r) => r.ok);

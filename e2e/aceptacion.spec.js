@@ -36,7 +36,7 @@ test.afterEach(async ({}, testInfo) => {
 });
 
 test.afterAll(async () => {
-  await caso('✅ Lista de aceptación completa');
+  await caso('Lista de aceptación completa');
   await page.waitForTimeout(2500);
   await page.close();
 });
