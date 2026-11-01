@@ -39,6 +39,7 @@ dd{margin:0}
 pre{margin:0;padding:12px;background:var(--consola);color:#d7e3ff;font:13px/1.5 Consolas,"Cascadia Mono",monospace;white-space:pre-wrap;word-break:break-word}
 .arch{display:block;padding:6px 12px;font-size:13px;color:var(--azul)}
 
+.tabla{overflow-x:auto;margin:8px 0 12px}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border:1px solid var(--borde);padding:8px;text-align:left;vertical-align:top}th{background:#eef2f8;color:var(--azul)}td a{color:var(--azul)}
 figure{margin:12px 0 0}figure img{width:100%;height:auto;border:1px solid var(--borde);border-radius:8px}
 figcaption{font-size:13px;color:var(--suave);margin-top:4px}
 .boton{display:inline-block;padding:8px 14px;border-radius:8px;background:var(--azul);color:#fff;text-decoration:none;font-weight:600}
@@ -52,7 +53,7 @@ figcaption{font-size:13px;color:var(--suave);margin-top:4px}
 <p>Sistema de Control de Inventario · Papelería Los Pingüinos</p>
 <p>Once casos del plan de pruebas, ejecutados con PHPUnit y Playwright en la laptop HP Victus 15 y después en GitHub Actions.</p>
 </div></div>
-<nav><div><a href="#cp-01">CP-01</a><a href="#cp-02">CP-02</a><a href="#cp-11">CP-11</a><a href="#cp-03">CP-03</a><a href="#cp-04">CP-04</a><a href="#cp-07">CP-07</a><a href="#cp-08">CP-08</a><a href="#cp-09">CP-09</a><a href="#cp-12">CP-12</a><a href="#cp-13">CP-13</a><a href="#cp-23">CP-23</a><a href="#ci">CI</a></div></nav>
+<nav><div><a href="#cp-01">CP-01</a><a href="#cp-02">CP-02</a><a href="#cp-11">CP-11</a><a href="#cp-03">CP-03</a><a href="#cp-04">CP-04</a><a href="#cp-07">CP-07</a><a href="#cp-08">CP-08</a><a href="#cp-09">CP-09</a><a href="#cp-12">CP-12</a><a href="#cp-13">CP-13</a><a href="#cp-23">CP-23</a><a href="#rondas">Rondas CI</a><a href="#pull-requests">Pull requests</a><a href="#repositorio">Repositorio</a></div></nav>
 <main>
 <div class="res">
 <div><b>20 / 20</b>PHPUnit · 70 verificaciones · 0.265 s<br><a href="img/ejecucion-phpunit.png">Captura de la terminal</a></div>
@@ -148,10 +149,42 @@ OK CP-23 · 4 No se puede vender más de lo que hay   (4.7 s)
 OK CP-23 · 5 Existencias avisan cuando un producto queda bajo el mínimo   (6.3 s)
 OK CP-23 · 6 El reporte cuadra con lo que se movió   (1.7 s)</pre></div>
 <ul class="partes"><li><a href="https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html#?testId=f22e5abee46294e4ad8c-c9277ddc91181d143171">CP-23 · 1 La cliente registra un producto nuevo</a></li><li><a href="https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html#?testId=f22e5abee46294e4ad8c-a53d4279c032a24fc27e">CP-23 · 2 Llega mercancía: entrada de 25 piezas</a></li><li><a href="https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html#?testId=f22e5abee46294e4ad8c-2980c8e3908326c6713d">CP-23 · 3 Venta: salida de 8 piezas</a></li><li><a href="https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html#?testId=f22e5abee46294e4ad8c-b12eafb45b192fd7a968">CP-23 · 4 No se puede vender más de lo que hay</a></li><li><a href="https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html#?testId=f22e5abee46294e4ad8c-af0fc23142337437d024">CP-23 · 5 Existencias avisan cuando un producto queda bajo el mínimo</a></li><li><a href="https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html#?testId=f22e5abee46294e4ad8c-7e949af4ea723e407116">CP-23 · 6 El reporte cuadra con lo que se movió</a></li></ul></section>
-<section id="ci"><header><h2>Integración continua</h2><span class="chip bien">Success</span><span class="tipo">GitHub Actions</span></header>
-<dl><div class="dato"><dt>Ejecución</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/40818606235">Run 40818606235</a> · commit ae6f3df · rama feature/interfaz-pinguinos</dd></div>
-<div class="dato"><dt>Etapas</dt><dd>Unitarias 11 s · Integración 9 s · Sistema y aceptación 1 min 53 s · Imagen Docker 32 s</dd></div>
-<div class="dato"><dt>Archivo del flujo</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/ae6f3df/.github/workflows/ci-pruebas.yml">.github/workflows/ci-pruebas.yml</a></dd></div></dl>
-<figure><a href="img/github-actions.png"><img src="img/github-actions.png" alt="Ejecución del flujo en GitHub Actions con las cuatro etapas en verde" loading="lazy"></a><figcaption>Ejecución del flujo en GitHub Actions.</figcaption></figure>
+<section id="rondas"><span id="ci"></span><header><h2>Rondas del flujo de integración continua</h2><span class="chip bien">3 de 3 en verde</span><span class="tipo">GitHub Actions · ci-pruebas.yml</span></header>
+<p class="req">Cada push a la rama feature/interfaz-pinguinos dispara el flujo completo: 20 pruebas de PHPUnit, 18 de Playwright y la imagen Docker. Cada etapa enlaza con su registro en GitHub.</p>
+<div class="tabla"><table><thead><tr><th>Ronda</th><th>Fecha</th><th>Commit</th><th>Motivo</th><th>Etapas</th><th>Resultado</th></tr></thead><tbody>
+<tr><td><b>Ronda 1</b></td><td>28/10/2026, 10:35 p. m.</td><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/commit/ae6f3df">ae6f3df</a></td><td>Subimos el archivo ci-pruebas.yml; primera ejecución del flujo.</td>
+<td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/40818606235/job/123265493982">1. Unitarias (PHPUnit)</a>: 11 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/40818606235/job/123265565045">2. Integración (PHPUnit)</a>: 9 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/40818606235/job/123265627314">3. Sistema y aceptación (Playwright)</a>: 1 min 53 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/40818606235/job/123266205842">4. Imagen Docker</a>: 32 s</td>
+<td><span class="chip bien">Success</span><br>2 min 56 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/40818606235">Ver ronda 1</a></td></tr>
+<tr><td><b>Ronda 2</b></td><td>01/11/2026, 4:38 p. m.</td><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/commit/810c1fc">810c1fc</a></td><td>Quitamos emojis de la documentación y de los mensajes de las pruebas.</td>
+<td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41358133233/job/125002511104">1. Unitarias (PHPUnit)</a>: 14 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41358133233/job/125002576335">2. Integración (PHPUnit)</a>: 9 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41358133233/job/125002625476">3. Sistema y aceptación (Playwright)</a>: 1 min 50 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41358133233/job/125003087180">4. Imagen Docker</a>: 28 s</td>
+<td><span class="chip bien">Success</span><br>2 min 51 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41358133233">Ver ronda 2</a></td></tr>
+<tr><td><b>Ronda 3</b></td><td>01/11/2026, 4:52 p. m.</td><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/commit/498df13">498df13</a></td><td>Cambiamos las palomitas de los resultados de evidencias por OK.</td>
+<td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41359258733/job/125005889982">1. Unitarias (PHPUnit)</a>: 11 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41359258733/job/125005942610">2. Integración (PHPUnit)</a>: 12 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41359258733/job/125006002402">3. Sistema y aceptación (Playwright)</a>: 1 min 57 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41359258733/job/125006488335">4. Imagen Docker</a>: 28 s</td>
+<td><span class="chip bien">Success</span><br>2 min 57 s<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/41359258733">Ver ronda 3</a></td></tr>
+</tbody></table></div>
+<p><a class="boton" href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/workflows/ci-pruebas.yml">Ver todas las rondas en GitHub Actions</a></p>
+<dl><div class="dato"><dt>Archivo del flujo</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/blob/ae6f3df/.github/workflows/ci-pruebas.yml">.github/workflows/ci-pruebas.yml</a></dd></div></dl>
+<figure><a href="img/github-actions.png"><img src="img/github-actions.png" alt="Ronda 1 del flujo en GitHub Actions con las cuatro etapas en verde" loading="lazy"></a><figcaption>Ronda 1 (28/10/2026): las cuatro etapas en verde.</figcaption></figure>
+</section>
+<section id="pull-requests"><header><h2>Pull requests</h2><span class="chip bien">4 integrados</span><span class="tipo">CI en cada pull request</span></header>
+<p class="req">Cada pull request corrió el flujo “CI - Pruebas y construcción” antes de integrarse.</p>
+<div class="tabla"><table><thead><tr><th>PR</th><th>Ramas</th><th>Título</th><th>Revisión automática</th><th>Resultado</th></tr></thead><tbody>
+<tr><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/pull/1"><b>#1</b></a></td><td>feature/productos hacia develop</td><td>feat(productos): gestión de productos (CP-01 a CP-06)</td>
+<td>PHPUnit (PHP 8.2 y 8.3) e imagen Docker<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/37229141324">Ver la ejecución del CI</a></td><td><span class="chip bien">Success</span><br>Integrado el 04/10/2026</td></tr>
+<tr><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/pull/2"><b>#2</b></a></td><td>feature/inventario hacia develop</td><td>feat(inventario): entradas, salidas y existencias (CP-07 a CP-11)</td>
+<td>PHPUnit (PHP 8.2 y 8.3) e imagen Docker<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/37229342508">Ver la ejecución del CI</a></td><td><span class="chip bien">Success</span><br>Integrado el 04/10/2026</td></tr>
+<tr><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/pull/3"><b>#3</b></a></td><td>feature/reportes hacia develop</td><td>feat(reportes): reporte básico de inventario (CP-12)</td>
+<td>PHPUnit (PHP 8.2 y 8.3) e imagen Docker<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/37229549583">Ver la ejecución del CI</a></td><td><span class="chip bien">Success</span><br>Integrado el 04/10/2026</td></tr>
+<tr><td><a href="https://github.com/guadalupeca378-svg/sistema-inventario/pull/4"><b>#4</b></a></td><td>release hacia main</td><td>release: versión 1.0.0</td>
+<td>PHPUnit (PHP 8.2 y 8.3) e imagen Docker<br><a href="https://github.com/guadalupeca378-svg/sistema-inventario/actions/runs/37229819006">Ver la ejecución del CI</a></td><td><span class="chip bien">Success</span><br>Integrado el 04/10/2026</td></tr>
+</tbody></table></div>
+<p><a class="boton" href="https://github.com/guadalupeca378-svg/sistema-inventario/pulls?q=is%3Apr">Ver todos los pull requests</a></p>
+</section>
+<section id="repositorio"><header><h2>Repositorio</h2><span class="tipo">GitHub</span></header>
+<dl><div class="dato"><dt>Repositorio</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario">guadalupeca378-svg/sistema-inventario</a></dd></div>
+<div class="dato"><dt>Ramas</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/tree/main">main</a> · <a href="https://github.com/guadalupeca378-svg/sistema-inventario/tree/develop">develop</a> · <a href="https://github.com/guadalupeca378-svg/sistema-inventario/tree/release">release</a> · <a href="https://github.com/guadalupeca378-svg/sistema-inventario/tree/feature/interfaz-pinguinos">feature/interfaz-pinguinos</a></dd></div>
+<div class="dato"><dt>Pruebas PHPUnit</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/tree/feature/interfaz-pinguinos/tests">tests/</a></dd></div>
+<div class="dato"><dt>Pruebas Playwright</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/tree/feature/interfaz-pinguinos/e2e">e2e/</a></dd></div>
+<div class="dato"><dt>Historial de commits</dt><dd><a href="https://github.com/guadalupeca378-svg/sistema-inventario/commits/feature/interfaz-pinguinos">feature/interfaz-pinguinos</a></dd></div></dl>
 </section>
 </main></body></html>
