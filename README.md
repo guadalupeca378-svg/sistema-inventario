@@ -6,6 +6,17 @@ y despliegue con contenedores).
 
 Universidad Tecnológica de Campeche · Ingeniería en Desarrollo y Gestión de Software · Décimo A
 
+## Resultados de pruebas
+
+Última ejecución completa: **28 de octubre de 2026**. Las tres rondas posteriores en GitHub Actions también terminaron en verde.
+
+| Conjunto | Pruebas | Resultado | Evidencia |
+|---|---|---|---|
+| PHPUnit (unitarias e integración) | 20 | **20 de 20 aprobadas** · 70 verificaciones · 0.265 s | [Evidencias por caso](https://guadalupeca378-svg.github.io/sistema-inventario/ejecucion-28-10-2026/index.html) |
+| Playwright (sistema y aceptación) | 18 | **18 de 18 aprobadas** · Microsoft Edge · 1.1 min | [Reporte con capturas](https://guadalupeca378-svg.github.io/sistema-inventario/reporte-28-10-2026/index.html) |
+| Integración continua (`ci-pruebas.yml`) | 3 rondas | **3 de 3 en verde** | [Rondas en GitHub Actions](https://github.com/guadalupeca378-svg/sistema-inventario/actions/workflows/ci-pruebas.yml) |
+| Pull requests | 4 | **4 integrados** con CI aprobado | [Pull requests](https://github.com/guadalupeca378-svg/sistema-inventario/pulls?q=is%3Apr) |
+
 ## Funcionalidades del sistema
 
 | Módulo | Funciones |
